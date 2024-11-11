@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div class="zzz">
+    <div class="abc" >
+        <h1>Login</h1> 
+                <form method="POST" id="booking-form" class="booking-form">
+                    
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="form2Example1" class="form-control" name="username" required/>
+                        <label class="form-label" for="form2Example1">Username</label>
+                    </div>
+
+                    
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" id="form2Example1" class="form-control" name="password" required/>
+                        <label class="form-label" for="form2Example1">Password</label>
+                    </div>
+                    <div class="text-center pt-1 mb-5 pb-1">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Login</button>
+                    </div>
+                    <div class="text-center ">
+                        <p>Forget password <a href="{{url_for('reset_password')}}">Click here</a></p>
+                    </div>
+                    <div class="text-center ">
+                        <p>Don't have an account? <a href="{{url_for('register')}}">Register</a></p>
+                    </div>
+                </form>
+                
+                
+    </div>
+    </div>
+
+    
+{% endblock %}
+{% set background_image = url_for('static',filename='images/login.png.jpg') %}

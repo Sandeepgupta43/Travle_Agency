@@ -1,0 +1,18 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="jumbotron text-center mt-4 abc2">
+        <h1 class="mt-0">Welcome to Online Travel Agency</h1>
+       
+        <br>
+        <br>
+         <a href="{{ url_for('flight') }}"><img src="../static/images/1.png.jpg" class="logo1"></a>
+         <a href="{{ url_for('railway') }}"><img src="../static/images/2.png.jpg" class="logo1"></a>
+         <a href="{{ url_for('bus') }}"><img src="../static/images/3.png.jpg" class="logo1"></a>
+         <a href="{{ url_for('hotel') }}" ><img src="../static/images/Hotel.png.jpg" class="logo1"></a>
+  
+    </div>
+
+   
+{% endblock %}

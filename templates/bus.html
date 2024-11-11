@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div class="abc">
+  <h1>BOOK TICKET</h1>
+  <form action="{{url_for('search_bus')}}" method="POST" class="booking-form" id="booking-form">
+      <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="form2Example1" class="form-control" name="from_location" required/>
+          <label class="form-label" for="form2Example1">From</label>
+      </div>
+      
+      <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" id="form2Example1" class="form-control" name="to_location" required/>
+          <label class="form-label" for="form2Example1">To</label>
+      </div>
+      
+
+      <div data-mdb-input-init class="form-outline mb-4">
+          <label for="date form2Example1" class="form-label">Date</label>
+          <input type="date" name="departure_date" id="date form2Example1" class="form-control" required>
+      </div>
+      
+      <div class="text-center pt-1 mb-5 pb-1">
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Search</button>
+      </div>
+  </form>    
+</div>
+{% endblock %} {% set background_image = url_for('static',
+filename='images/bus.jpg') %}

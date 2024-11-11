@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center text-primary mb-4">Manage Flights</h3>
+
+    <!-- Button to Add a New Flight -->
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ url_for('add_flight') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New Flight
+        </a>
+    </div>
+
+    <!-- Check if there are any flights -->
+    {% if flights %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Flight ID</th>
+                        <th>Flight Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Departure Date</th>
+                        <th>Seats Available</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for flight in flights %}
+                    <tr>
+                        <td>{{ flight.id }}</td>
+                        <td>{{ flight.flight_name }}</td>
+                        <td>{{ flight.from_location }}</td>
+                        <td>{{ flight.to_location }}</td>
+                        <td>{{ flight.departure_date }}</td>
+                        <td style="text-align: center;">{{ flight.seats }}</td>
+                        <td>₹{{ '{:,.2f}'.format(flight.price) }}</td> <!-- Format price with ₹ -->
+                        <td>
+                            <!-- Delete Flight Form -->
+                            <form action="{{ url_for('delete_flight') }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="flight_id" value="{{ flight.id }}">
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+
+                            <!-- Edit Flight Link -->
+                            <a href="{{ url_for('edit_flight', flight_id=flight.id) }}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            No flights available. Please add a new flight.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center text-primary mb-4">Manage Hotels</h3>
+
+    <!-- Add New Hotel Button -->
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ url_for('add_hotel') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New Hotel
+        </a>
+    </div>
+
+    <!-- Check if there are any hotels -->
+    {% if hotels %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Hotel ID</th>
+                        <th>Hotel Name</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Rooms Available</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hotel in hotels %}
+                    <tr>
+                        <td>{{ hotel.id }}</td>
+                        <td>{{ hotel.hotel_name }}</td>
+                        <td>{{ hotel.location }}</td>
+                        <td>{{ hotel.date }}</td>
+                        <td style="text-align: center;">{{ hotel.room }}</td>
+                        <td>₹{{ '{:,.2f}'.format(hotel.price) }}</td> <!-- Format price with ₹ -->
+                        <td>
+                            <!-- Delete Hotel Form -->
+                            <form action="{{ url_for('delete_hotel') }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="hotel_id" value="{{ hotel.id }}">
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+
+                            <!-- Edit Hotel Link -->
+                            <a href="{{ url_for('edit_hotel', hotel_id=hotel.id) }}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            No hotels available. Please add a new hotel.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

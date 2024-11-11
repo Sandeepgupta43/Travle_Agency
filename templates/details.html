@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Booking Details</h1>
+    <div class="card mt-4 p-4" style="width: 60%; margin: auto;">
+        <h2>Booking Information</h2>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Booking Type:</strong></div>
+            <div class="col-md-6">{{ booking.booking_type }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Booking Date:</strong></div>
+            <div class="col-md-6">{{ booking.date }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Departure From:</strong></div>
+            <div class="col-md-6">{{ from_location }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Departure To:</strong></div>
+            <div class="col-md-6">{{ to_location }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Departure Date :</strong></div>
+            <div class="col-md-6">{{ departure_date }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><strong>Status:</strong></div>
+            <div class="col-md-6">{{ booking.status }}</div>
+        </div>
+        
+        <h2>Passenger Information</h2>
+        
+        {% if first_passenger %}
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Name:</strong></div>
+                <div class="col-md-6">{{ first_passenger.name }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Age:</strong></div>
+                <div class="col-md-6">{{ first_passenger.age }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Seat Number:</strong></div>
+                <div class="col-md-6">{{ first_passenger.seat_number }}</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"><strong>Contact Number:</strong></div>
+                <div class="col-md-6">{{ first_passenger.phone_no }}</div>
+            </div>
+        {% else %}
+            <p>No passenger information available.</p>
+        {% endif %}
+        
+        <div class="row mt-4">
+            <div class="col-md-6"><strong>Total Amount:</strong></div>
+            <div class="col-md-6">{{ booking.amount }}</div>
+        </div>
+    </div>
+{% endblock %}

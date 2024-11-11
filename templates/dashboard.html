@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="userDashboard">
+        <div class="container my-4">
+            <div class="card welcome-section bg-light shadow-sm mb-4 border-0">
+                <div class="card-body">
+                    <h2 class="text-primary"><i class="bi bi-person-circle"></i> Welcome, {{ user.username }}</h2>
+                    <p class="text-muted">We're glad to have you back!</p>
+                    
+                    <hr>
+                    
+                    <div class="user-info">
+                        <p><i class="bi bi-envelope-fill"></i> <strong>Email:</strong> {{ user.email }}</p>
+                        <p><i class="bi bi-telephone-fill"></i> <strong>Contact Number:</strong> {{ user.contact_number }}</p>
+                    </div>
+                    
+                    <a href="{{ url_for('home') }}" class="btn btn-primary my-3"><i class="bi bi-calendar-check"></i> Make a Booking</a>
+                    
+                    <div class="password-reset mt-3">
+                        <p>Want to change your password? 
+                            <a href="{{ url_for('reset_password') }}" class="text-primary font-weight-bold">Click here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        
+            <div class="coupon-section bg-info text-white p-4 rounded border border-primary text-center shadow-sm">
+                <h3 class="text-success font-weight-bold">This is your Coupon Code</h3>
+                <p>This Coupon is valid till Diwali!</p>
+                <p class="display-4 font-weight-bold text-warning">2MGPQ9QX</p>
+                <p class="countdown text-danger h5">Time left: <span id="countdown" class="font-weight-bold"></span></p>
+                <p class="discount-info">You can apply this coupon to get 15% off for Flight, Bus, and Hotel bookings.</p>
+            </div>
+        </div>
+        
+    </div>
+
+        <hr>
+        <h3 class="mt-5 text-primary">Booking History</h3>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Booking Type</th>
+                        <th scope="col">Booking Date</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking_detail in booking_details %}
+                    <tr>
+                        <td>{{ booking_detail.booking_type }}</td>
+                        <td>{{ booking_detail.date }}</td>
+                        <td>₹{{ "%.2f"|format(booking_detail.amount) }}</td>
+                        <td>
+                            {% if booking_detail.status == 'confirmed' %}
+                                <span class="badge bg-success">{{ booking_detail.status }}</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">{{ booking_detail.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('details', booking_id=booking_detail.id, passenger_id=booking_detail.passenger_id) }}" class="btn btn-outline-primary btn-sm">Details</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+{% endblock %}

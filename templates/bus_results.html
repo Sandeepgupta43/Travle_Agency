@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mt-5">Bus Details</h3>
+<table class="table table-striped abc1">
+    <thead>
+        <tr>
+            <th>Bus Name</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure date</th>
+            <th>Available seats</th>
+            <th>Price</th>
+            <th>Book Now</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bus in buses %}
+        <tr>
+            <td>{{ bus.bus_name }}</td>
+            <td>{{ bus.from_location }}</td>
+            <td>{{ bus.to_location }}</td>
+            <td>{{ bus.departure_date }}</td>
+            <td style="text-align: center;">{{ bus.seats}}</td>
+            <td>{{ bus.price }}</td>
+            <td>
+                <form action="{{url_for('passenger_details',booking_type='bus', transport_id=bus.id)}}" method="GET">
+                    <button class="btn btn-success btn-sm" type="submit">Book Now</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% set background_image = url_for('static',filename='images/bus.jpg') %}

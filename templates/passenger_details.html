@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm" style="width: 400px; padding: 20px;">
+        <h3 class="text-center text-primary mb-4">Enter Passenger Details for {{ booking_type.capitalize() }}</h3>
+        <form action="{{ url_for('process_booking', booking_type=booking_type, transport_id=transport_id) }}" method="POST">
+            <div class="form-group mb-3">
+                <label for="passenger_name" class="form-label">Passenger Name</label>
+                <input type="text" class="form-control" id="passenger_name" name="passenger_name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="phone_no" class="form-label">Phone No</label>
+                <input type="text" class="form-control" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">Proceed to Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

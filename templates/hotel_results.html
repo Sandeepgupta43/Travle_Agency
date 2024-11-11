@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mt-5">Hotel Details</h3>
+<table class="table table-striped abc1">
+    <thead>
+        <tr>
+            <th>Hotel Name</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Available rooms</th>
+            <th>Price</th>
+            <th>Book Now</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hotel in hotels %}
+        <tr>
+            <td>{{ hotel.hotel_name }}</td>
+            <td>{{ hotel.location }}</td>
+            <td>{{ hotel.date }}</td>
+            <td style="text-align: center;">{{ hotel.room}}</td>
+            <td>{{ hotel.price }}</td>
+            <td>
+                <form action="{{ url_for('passenger_details',booking_type='hotel', transport_id=hotel.id) }}" method="GET">
+                    <button class="btn btn-success btn-sm" type="submit">Book Now</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% set background_image = url_for('static', filename='images/hotelBG.jpg') %}

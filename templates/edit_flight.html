@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Edit flight</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>flight Name</label>
+            <input type="text" name="flight_name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>New Departure from</label>
+            <input type="text" name="from_location" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>New Destination to</label>
+            <input type="text" name="to_location" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>New Departure date</label>
+            <input type="datetime-local" name="departure_date" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>New seats</label>
+            <input type="number" name="seats" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>New Price</label>
+            <input type="number" name="price" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+{% endblock %}

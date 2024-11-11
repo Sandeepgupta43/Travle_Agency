@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm" style="width: 500px; padding: 20px;">
+        <h3 class="text-center text-primary mb-4">Payment Details</h3>
+        <form action="{{ url_for('process_payment', booking_type=booking_type, transport_id=transport_id, passenger_id=passenger_id) }}" method="POST">
+            <div class="form-group mb-3">
+                <label for="card_number" class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="card_number" name="card_number" maxlength="16" placeholder="Enter your card number" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="expiry_date" class="form-label">Expiry Date</label>
+                <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" placeholder="Enter your CVV" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="cardholder_name" class="form-label">Cardholder Name</label>
+                <input type="text" class="form-control" id="cardholder_name" name="cardholder_name" placeholder="Enter cardholder name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="coupon_code" class="form-label">Enter Coupon Code for 15% off</label>
+                <input type="text" class="form-control" id="coupon_code" name="coupon" placeholder="Enter coupon code">
+                <button class="btn btn-primary mt-2 w-100" type="button" onclick="verifyCoupon()">Verify</button>
+            </div>
+            <div id="coupon-status" class="mb-3"></div> <!-- Coupon status message -->
+
+            <input type="hidden" name="total_amount" id="hidden_total_amount" value="{{ amount }}">
+
+            <h4 class="text-center text-primary mb-4">Order Summary</h4>
+            <div class="form-group mb-3 d-flex align-items-center">
+                <label for="current_amount" class="form-label me-2" style="width: 150px;">Current Amount</label>
+                <input type="number" class="form-control" id="current_amount" value="{{ amount }}" readonly style="flex: 1;">
+            </div>
+            <div class="form-group mb-3 d-flex align-items-center">
+                <label for="discount" class="form-label me-2" style="width: 150px;">Discount</label>
+                <input type="text" class="form-control" id="discount" value="0%" readonly style="flex: 1;">
+            </div>
+            
+            <div class="form-group mb-3 d-flex align-items-center">
+                <label for="total_amount" class="form-label me-2" style="width: 150px;">Total Amount</label>
+                <input type="number" class="form-control" id="total_amount" value="{{ amount }}" readonly style="flex: 1;">
+            </div>
+            
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary w-100">Submit Payment</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Order Summary Card -->
+    <!-- <div class="card shadow-sm" style="width: 40%; padding: 20px; margin-top: 20px;">
+        <h4 class="text-center text-primary mb-4">Order Summary</h4>
+        <div class="form-group mb-3">
+            <label for="current_amount" class="form-label">Current Amount</label>
+            <input type="number" class="form-control" id="current_amount" value="{{ amount }}" readonly>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="discount" class="form-label">Discount</label>
+            <input type="text" class="form-control" id="discount" value="0%" readonly>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="total_amount" class="form-label">Total Amount</label>
+            <input type="number" class="form-control" id="total_amount" value="{{ amount }}" readonly>
+        </div>
+    </div> -->
+</div>
+{% endblock %}
