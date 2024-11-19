@@ -106,3 +106,25 @@ function verifyCoupon() {
         document.getElementById('coupon-status').innerHTML = "<span style='color:red;'>Error verifying coupon.</span>";
     });
 }
+
+function printTicket() {
+    // Create a new window for the print view
+    const printContents = document.getElementById("ticket").innerHTML;
+    const originalContents = document.body.innerHTML;
+    
+    document.body.innerHTML = printContents;  // Replace page content with ticket content
+    window.print();  // Open print dialog
+    document.body.innerHTML = originalContents;  // Restore original content
+}
+
+function downloadPDF() {
+    const ticketElement = document.getElementById("ticket");
+    const options = {
+        margin:       0.5,
+        filename:     'A4S_Travels_Ticket.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(ticketElement).save();
+}

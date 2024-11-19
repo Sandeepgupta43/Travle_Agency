@@ -202,44 +202,80 @@ def dashboard():
 
     return render_template('dashboard.html', user=user,booking_details=booking_details)
 
+
+# this for booking details
 @app.route('/dashboard/details')
 def details():
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
     booking_id = request.args.get('booking_id')
-    passenger_id = request.args.get('passenger_id')  # Get passenger_id from the query parameters
+    passenger_id = request.args.get('passenger_id')
+
+    # Validate query parameters
+    if not booking_id or not passenger_id:
+        flash("Booking ID or Passenger ID is missing.")
+        return redirect(url_for('dashboard'))
 
     # Fetch the booking
     booking = Booking.query.filter_by(id=booking_id, user_id=session['user_id']).first()
-
-    # Validate booking
     if not booking:
+        flash("Booking not found.")
         return redirect(url_for('dashboard'))
 
-    # Fetch passenger details filtered by transport_id and passenger_id
+    # Fetch passenger details
     passenger = Passenger.query.filter_by(transport_id=booking.transport_id, id=passenger_id).first()
+    if not passenger:
+        flash("Passenger details not found.")
+        return redirect(url_for('dashboard'))
 
-    # Fetch the location details based on booking type
+    # Initialize default values
+    hotel_location = None
+    room_number = None
+    from_location = None
+    to_location = None
+    departure_date = None
+
+    # Fetch transport/hotel details based on booking type
     if booking.booking_type == 'flight':
         transport = Flight.query.get(booking.transport_id)
     elif booking.booking_type == 'train':
         transport = Railway.query.get(booking.transport_id)
     elif booking.booking_type == 'bus':
         transport = Bus.query.get(booking.transport_id)
+    elif booking.booking_type == 'hotel':
+        transport = Hotel.query.get(booking.transport_id)
     else:
-        transport = None
+        flash("Invalid booking type.")
+        return redirect(url_for('dashboard'))
 
-    # Fetch deatils of booking from_destination to to_destination 
+    # Handle transport or hotel details
     if transport:
-        from_location = transport.from_location
-        to_location = transport.to_location
-        departure_date  = transport.departure_date
+        if booking.booking_type == 'hotel':
+            room_number = 1  # Default room number or logic to calculate it
+            hotel_location = transport.location
+        else:
+            from_location = transport.from_location
+            to_location = transport.to_location
+            departure_date = transport.departure_date
     else:
-        from_location = to_location = None
+        flash("Transport or hotel details not found.")
+        return redirect(url_for('dashboard'))
 
-    # Pass booking and passenger data to the template
-    return render_template('details.html', booking=booking, first_passenger=passenger,from_location=from_location,to_location=to_location,departure_date=departure_date)
+    # Pass data to the template
+    return render_template(
+        'details.html',
+        booking=booking,
+        first_passenger=passenger,
+        from_location=from_location,
+        to_location=to_location,
+        departure_date=departure_date,
+        room_number=room_number,
+        hotel_location=hotel_location
+    )
+
+
+
 
 
 valid_coupons = {
@@ -701,35 +737,49 @@ def get_price(booking_type, transport_id):
 def process_booking(booking_type, transport_id):
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    
-    # Fetch the transport details based on booking type
+
+    # Fetch the transport or hotel details based on booking type
     if booking_type == 'flight':
         transport = Flight.query.get(transport_id)
     elif booking_type == 'train':
         transport = Railway.query.get(transport_id)
     elif booking_type == 'bus':
         transport = Bus.query.get(transport_id)
+    elif booking_type == 'hotel':
+        transport = Hotel.query.get(transport_id)  # Assuming a Hotel model exists
     else:
         return "Invalid booking type", 400
-    
-    # Check if seats are available
-    if transport.seats <= 0:
-        flash("No seats available for this booking.")
-        return redirect(url_for('passenger_details', booking_type=booking_type, transport_id=transport_id))
 
-    # Reduce seats by one and commit the change
-    transport.seats -= 1
+    # Check availability
+    if booking_type == 'hotel':
+        if transport.room <= 0:  # Assuming 'rooms' indicates available hotel rooms
+            flash("No rooms available for this booking.")
+            return redirect(url_for('passenger_details', booking_type=booking_type, transport_id=transport_id))
+
+        # Reduce available rooms by one
+        transport.room -= 1
+    else:
+        if transport.seats <= 0:
+            flash("No seats available for this booking.")
+            return redirect(url_for('passenger_details', booking_type=booking_type, transport_id=transport_id))
+
+        # Reduce available seats by one
+        transport.seats -= 1
+
+    # Commit availability changes
     db.session.commit()
 
-    # Calculate the allotted seat number
-    allotted_seat_number = transport.seats + 1
+    # Calculate the allotted seat or room number
+    allotted_seat_or_room_number = transport.seats + 1 if booking_type != 'hotel' else transport.room + 1
 
+    # Get passenger/guest details from the form
     passenger_name = request.form['passenger_name']
     age = request.form['age']
     phone_no = request.form['phone_no']
     gender = request.form['gender']
     user_id = session['user_id']
 
+    # Create a new passenger/guest record
     new_passenger = Passenger(
         user_id=user_id,
         transport_id=transport_id,
@@ -738,13 +788,14 @@ def process_booking(booking_type, transport_id):
         age=age,
         phone_no=phone_no,
         gender=gender,
-        seat_number = allotted_seat_number
+        seat_number=allotted_seat_or_room_number  # Use the same field for seats or rooms
     )
     db.session.add(new_passenger)
     db.session.commit()
 
     return redirect(
-        url_for('payment_page', booking_type=booking_type, transport_id=transport_id, passenger_id=new_passenger.id,seat_number=allotted_seat_number)
+        url_for('payment_page', booking_type=booking_type, transport_id=transport_id, passenger_id=new_passenger.id,
+                seat_number=allotted_seat_or_room_number)
     )
 
 

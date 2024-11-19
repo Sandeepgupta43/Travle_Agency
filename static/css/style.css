@@ -34,8 +34,7 @@ h2{
 }
 
 .logo1:hover{
-    height: 8rem;
-    width: 8rem; 
+    margin-top:2px;
  }
 .zzz{
     justify-content: center;
@@ -126,3 +125,84 @@ body {
     margin-right: 5px;       /* Space between icon and text */
 }
 
+.login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("{{ background_image }}");
+        
+        background-size: cover;
+        background-position: center;
+    }
+    .login-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        max-width: 400px;
+        width: 100%;
+        
+        
+    }
+    .login-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #007bff;
+        text-align: center;
+    }
+    .form-outline .form-control {
+        background-color: #f1f1f1;
+    }
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #004085);
+    }
+    .additional-links {
+        font-size: 0.9rem;
+    }
+
+    .register-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("{{ background_image }}");
+        background-size: cover;
+        background-position: center;
+    }
+    .register-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        max-width: 450px;
+        width: 100%;
+    }
+    .register-title {
+        font-size: 1.8rem;
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    footer{
+        border-radius:10px 10px 0 0;
+    }
+
+    .ticket-container {
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+        background-color: white;
+    }
+    .agency-name {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #007bff;
+    }
