@@ -1,30 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="abc">
-    <h1>BOOK TICKET</h1>
-    <form action="{{url_for('search_flight')}}" method="POST" class="booking-form" id="booking-form">
-        <div data-mdb-input-init class="form-outline mb-4">
-            <input type="text" id="form2Example1" class="form-control" name="from_location" required/>
-            <label class="form-label" for="form2Example1">From</label>
-        </div>
-        
-        <div data-mdb-input-init class="form-outline mb-4">
-            <input type="text" id="form2Example1" class="form-control" name="to_location" required/>
-            <label class="form-label" for="form2Example1">To</label>
-        </div>
-        
+<!-- <style>
+    body {
+        background: url('{{ background_image }}') no-repeat center center fixed;
+        background-size: cover;
+    }
+    
+    
+    .form-outline label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #495057;
+    }
+    .btn {
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 10px 20px;
+    }
+</style> -->
 
-        <div data-mdb-input-init class="form-outline mb-4">
-            <label for="date form2Example1" class="form-label">Date</label>
-            <input type="date" name="departure_date" id="date form2Example1" class="form-control" required>
-        </div>
-        
-        <div class="text-center pt-1 mb-5 pb-1">
-            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Search</button>
-        </div>
-    </form>    
+<div class="container">
+    <div class="booking-container">
+        <h1 class="login-title">BOOK TICKET</h1>
+        <form action="{{ url_for('search_flight') }}" method="POST" class="needs-validation" novalidate>
+            <!-- From Location -->
+            <div class="mb-4">
+                <label for="from_location" class="form-label">From</label>
+                <input type="text" id="from_location" class="form-control" name="from_location" placeholder="Enter departure city" required />
+                <div class="invalid-feedback">Please enter a departure city.</div>
+            </div>
+            
+            <!-- To Location -->
+            <div class="mb-4">
+                <label for="to_location" class="form-label">To</label>
+                <input type="text" id="to_location" class="form-control" name="to_location" placeholder="Enter destination city" required />
+                <div class="invalid-feedback">Please enter a destination city.</div>
+            </div>
+            
+            <!-- Date of Departure -->
+            <div class="mb-4">
+                <label for="departure_date" class="form-label">Date</label>
+                <input type="date" name="departure_date" id="departure_date" class="form-control" required>
+                <div class="invalid-feedback">Please select a valid date.</div>
+            </div>
+            
+            <!-- Search Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
 
 {% endblock %}
 

@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="abc">
-    <h1>Hotel Booking Form</h1>
-    <form id="booking-form" action="{{ url_for('search_hotel') }}" method="POST" class="booking-form">
-        
-        <div data-mdb-input-init class="form-outline mb-4">
-            <input type="text" id="form2Example1" class="form-control" name="location" required/>
-            <label class="form-label" for="form2Example1">Location</label>
-        </div>
-        <div data-mdb-input-init class="form-outline mb-4">
-            <label for="date form2Example1" class="form-label">Date</label>
-            <input type="date" name="date" id="date form2Example1" class="form-control" required>
-        </div>
-        
-        
-        <div class="text-center pt-1 mb-5 pb-1">
-            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Search</button>
-        </div>
-    </form>
+
+
+<div class="container">
+    <div class="booking-container">
+        <h1 class="login-title">Hotel Booking Form</h1>
+        <form id="booking-form" action="{{ url_for('search_hotel') }}" method="POST" class="needs-validation" novalidate>
+            <!-- Location Input -->
+            <div class="mb-4">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" id="location" class="form-control" name="location" placeholder="Enter city or area" required />
+                <div class="invalid-feedback">Please enter a location.</div>
+            </div>
+            
+            <!-- Date Input -->
+            <div class="mb-4">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" required />
+                <div class="invalid-feedback">Please select a valid date.</div>
+            </div>
+            
+            <!-- Search Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+
+
 {% endblock %}
 
-
+{% set background_image = url_for('static', filename='images/hotel-background.jpg') %}

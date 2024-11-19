@@ -84,20 +84,17 @@ h2{
     
 }
 
-
-
-
-/* .navbar a{
-    color: black;
+.booking-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
-body{
-    position: relative;
-}
-.navbar{
-    position: fixed;
-    top: 0;
-} */
+
+
 body {
     margin-top: 50px;
     
