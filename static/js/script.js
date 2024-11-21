@@ -46,7 +46,7 @@ function validateForm() {
 
 
 
-var diwaliDate = new Date("November 02, 2024 00:00:00").getTime();
+var diwaliDate = new Date("December 25, 2024 00:00:00").getTime();
 
 var countdownTimer = setInterval(function() {
 
@@ -86,11 +86,11 @@ function verifyCoupon() {
     .then(response => response.json())
     .then(data => {
         if (data.valid) {
-            const discountPercentage = 15;  // Assuming a fixed 15% discount for valid coupons
+            const discountPercentage = 11;  // Assuming a fixed 15% discount for valid coupons
             const discountAmount = (discountPercentage / 100) * currentAmount;
             const totalAmount = currentAmount - discountAmount;
 
-            document.getElementById('coupon-status').innerHTML = "<span style='color:green;'>Coupon applied! 15% off.</span>";
+            document.getElementById('coupon-status').innerHTML = "<span style='color:green;'>Coupon applied! 11% off.</span>";
             document.getElementById('discount').value = discountPercentage + "%";
             document.getElementById('total_amount').value = totalAmount.toFixed(2);
             document.getElementById('hidden_total_amount').value = totalAmount.toFixed(2);  // Update hidden field

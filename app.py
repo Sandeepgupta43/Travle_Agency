@@ -279,7 +279,7 @@ def details():
 
 
 valid_coupons = {
-    "2MGPQ9QX": 15,  # 15% off
+    "CRIS2024": 15,  # 15% off
     "DISCOUNT2024": 10,  # 10% off
     # Add more coupons here
 }
