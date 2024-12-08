@@ -203,3 +203,148 @@ body {
         margin-bottom: 1rem;
         color: #007bff;
     }
+
+
+    .mr{
+        margin-right:60px;
+    }
+    /* Add a transition effect to every card */
+.popup {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* On hover, apply transform and box-shadow changes */
+.popup:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+}
+
+/* Optional: Add a pseudo-element for additional effects */
+.popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.popup1{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.popup1:hover{
+    transform: scale(1.05); /* Slightly enlarge the card */
+
+}
+
+.carousel-item img{
+    border-radius:15px;
+}
+.carousel-item{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius:15px;
+}
+.carousel-item:hover{
+    transform: scale(1.05); /* Slightly enlarge the card */
+}
+.carousel-inner{
+    border-radius:15px;
+}
+/* Footer Styles */
+.footer {
+    background-color: #333; /* Dark background for footer */
+    color: #fff; /* White text color */
+    padding: 40px 20px; /* Padding around the footer */
+    font-size: 14px; /* Font size */
+}
+
+.footer-container {
+    display: flex; /* Flex layout for sections */
+    justify-content: space-between; /* Space between sections */
+    flex-wrap: wrap; /* Wrap sections on smaller screens */
+}
+
+.footer-section {
+    flex: 1; /* Each section takes equal space */
+    margin: 10px; /* Margin around each section */
+}
+
+.footer-section h3 {
+    margin-bottom: 10px; /* Spacing below the section heading */
+    font-size: 18px; /* Font size for section heading */
+}
+
+.footer-section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.footer-section ul li {
+    margin-bottom: 8px; /* Spacing between list items */
+}
+
+.footer-section a {
+    color: #fff; /* White link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-section a:hover {
+    color: #f44336; /* Change color on hover */
+}
+
+.icon {
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle; /* Center align icon with text */
+}
+
+.social-media {
+    display: flex; /* Flex layout for social media icons */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.social-media li {
+    margin-right: 10px; /* Spacing between icons */
+}
+
+.footer-bottom {
+    text-align: center; /* Center align the footer bottom text */
+    margin-top: 20px; /* Margin above the footer bottom */
+    font-size: 12px; /* Smaller font size */
+}
+
+
+
+
+.flash-messages {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

@@ -1,38 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3 class="mt-5">Flights Details</h3>
+<h3 class="mt-5">Flight Details</h3>
+
 <div class="table-responsive">
-<table class="table table-striped abc1">
-    <thead>
-        <tr>
-            <th>Flight Name</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Departure date</th>
-            <th>Available seats</th>
-            <th>Price</th>
-            <th>Book Now</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for flight in flights %}
-        <tr>
-            <td>{{ flight.flight_name }}</td>
-            <td>{{ flight.from_location }}</td>
-            <td>{{ flight.to_location }}</td>
-            <td>{{ flight.departure_date }}</td>
-            <td style="text-align: center;">{{ flight.seats}}</td>
-            <td>{{ flight.price }}</td>
-            <td>
-                <form action="{{ url_for('passenger_details',booking_type='flight', transport_id=flight.id) }}" method="GET">
-                    <button class="btn btn-success btn-sm" type="submit">Book Now</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    {% if flights|length > 0 %}
+    <table class="table table-striped abc1">
+        <thead>
+            <tr>
+                <th>Flight Name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Departure Date</th>
+                <th>Available Seats</th>
+                <th>Price</th>
+                <th>Book Now</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flight in flights %}
+            <tr>
+                <td>{{ flight.flight_name }}</td>
+                <td>{{ flight.from_location }}</td>
+                <td>{{ flight.to_location }}</td>
+                <td>{{ flight.departure_date }}</td>
+                <td style="text-align: center;">{{ flight.seats }}</td>
+                <td>{{ flight.price }}</td>
+                <td>
+                    <form action="{{ url_for('passenger_details', booking_type='flight', transport_id=flight.id) }}" method="GET">
+                        <button class="btn btn-success btn-sm" type="submit">Book Now</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning mt-3" role="alert">
+        No flights are available for the selected date or route. Please try searching for different options.
+    </div>
+    {% endif %}
 </div>
+
 {% endblock %}
+
 {% set background_image = url_for('static', filename='images/flightBac.jpg') %}

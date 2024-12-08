@@ -8,7 +8,7 @@ app.secret_key = '1234'
 
 # Configure MySQL DB connection
 #                                        mysql+pymysql://username:password@localhost/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:arpit@localhost/Travle'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/Travle'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -101,11 +101,22 @@ def register():
         email = request.form['email']
         password = request.form['password']
         contact_number = request.form['contact_number']
+
+
+        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
+        if existing_user:
+            if existing_user.username == username:
+                flash('Username already exists!', 'error')
+            if existing_user.email == email:
+                flash('Email already exists!', 'error')
+            return redirect(url_for('register'))
+
+
         # Add user to DB
         new_user = User(username=username, email=email, password=password, contact_number=contact_number)
         db.session.add(new_user)
         db.session.commit()
-        flash('Registration Successful! Please log in.')
+        flash('Registration Successful! Please log in.','success')
         return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -120,12 +131,48 @@ def login():
         if user:
             session['user_id'] = user.id
             if user.is_admin:
+                flash('Login successful!', 'success')  # Success message
                 return redirect(url_for('admin_dashboard'))
             else:
+
                 return redirect(url_for('dashboard'))
         else:
-            flash('Invalid credentials. Please try again.')
+
+            flash('Invalid username or password!', 'error')  # Error message
+            return render_template('login.html')
     return render_template('login.html')
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    if 'user_id' not in session:
+        flash('You need to log in to access this page.', 'danger')
+        return redirect(url_for('login'))
+
+    user = User.query.get(session['user_id'])
+
+    if request.method == 'POST':
+        # Retrieve form data
+        username = request.form.get('username')
+        email = request.form.get('email')
+        contact_number = request.form.get('contact_number')
+
+        # Validate and update the user's information
+        if username:
+            user.username = username
+        if email:
+            if User.query.filter(User.email == email, User.id != user.id).first():
+                flash('Email is already in use.', 'danger')
+                return render_template('edit_profile.html', user=user)
+            user.email = email
+        if contact_number:
+            user.contact_number = contact_number
+
+        # Commit changes
+        db.session.commit()
+        flash('Profile updated successfully!', 'success')
+        return redirect(url_for('dashboard'))  # Redirect back to the dashboard
+
+    return render_template('edit_profile.html', user=user)
 
 @app.route('/forget', methods=['GET', 'POST'])
 def forget():
@@ -199,6 +246,8 @@ def dashboard():
         return redirect(url_for('login'))
     user = User.query.get(session['user_id'])
     booking_details = Booking.query.filter_by(user_id=session['user_id']).all()
+    if user.is_admin:
+        return redirect(url_for('admin_dashboard'))  # Redirect admin to the admin dashboard
 
     return render_template('dashboard.html', user=user,booking_details=booking_details)
 
@@ -303,13 +352,14 @@ def flight():
 # for search flight
 @app.route('/flight/search_flight',methods=['POST'])
 def search_flight():
-    from_location = request.form['from_location']
-    to_location = request.form['to_location']
+    from_location = request.form['from_location'].replace(" ","").lower()
+    to_location = request.form['to_location'].replace(" ","").lower()
     departure_date = request.form['departure_date']
 
+    # Filter the database using case-insensitive and whitespace-ignored comparisons
     flights = Flight.query.filter(
-        Flight.from_location == from_location,
-        Flight.to_location == to_location,
+        func.replace(func.lower(Flight.from_location), " ", "") == from_location,
+        func.replace(func.lower(Flight.to_location), " ", "") == to_location,
         func.date(Flight.departure_date) == departure_date
     ).all()
     return render_template('flight_results.html',flights=flights)
@@ -401,13 +451,13 @@ def railway():
 # for search train
 @app.route('/railway/search_train',methods=['POST'])
 def search_train():
-    from_location = request.form['from_location']
-    to_location = request.form['to_location']
+    from_location = request.form['from_location'].replace(" ","").lower()
+    to_location = request.form['to_location'].replace(" ","").lower()
     departure_date = request.form['departure_date']
 
     trains = Railway.query.filter(
-        Railway.from_location == from_location,
-        Railway.to_location == to_location,
+        func.replace(func.lower(Railway.from_location)," ","") == from_location,
+        func.replace(func.lower(Railway.to_location)," ","") == to_location,
         func.date(Railway.departure_date) == departure_date
     ).all()
     return render_template('train_results.html',trains=trains)
@@ -500,13 +550,13 @@ def bus():
 # for search Bus
 @app.route('/bus/search_bus',methods=['POST'])
 def search_bus():
-    from_location = request.form['from_location']
-    to_location = request.form['to_location']
+    from_location = request.form['from_location'].replace(" ","").lower()
+    to_location = request.form['to_location'].replace(" ","").lower()
     departure_date = request.form['departure_date']
 
     buses = Bus.query.filter(
-        Bus.from_location==from_location,
-        Bus.to_location==to_location,
+        func.replace(func.lower(Bus.from_location)," ","")==from_location,
+        func.replace(func.lower(Bus.to_location)," ","")==to_location,
         func.date(Bus.departure_date)==departure_date
     ).all()
     return render_template('bus_results.html',buses=buses)
@@ -598,15 +648,22 @@ def delete_bus():
 def hotel():
 
     return render_template('hotel.html')
+
 # for search hotel
-@app.route('/hotel/search_hotel',methods=['POST'])
+@app.route('/hotel/search_hotel', methods=['POST'])
 def search_hotel():
-    location = request.form['location']
+    location = request.form['location'].replace(" ", "").lower()
     date = request.form['date']
 
-    hotels = Hotel.query.filter_by(location=location,date=date)
-    return render_template('hotel_results.html',hotels=hotels)
+    # Fetch hotels using the query
+    hotels = Hotel.query.filter(
+        func.replace(func.lower(Hotel.location), " ", "") == location,
+        Hotel.date == date
+    ).all()
 
+    print(hotels)  # Debugging: Print hotels to ensure query results are fetched
+
+    return render_template('hotel_results.html', hotels=hotels)
 
 
 # Show all hotels on admin pannel

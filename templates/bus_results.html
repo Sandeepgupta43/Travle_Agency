@@ -2,6 +2,7 @@
 {% block content %}
 
 <h3 class="mt-5">Bus Details</h3>
+{% if buses|length > 0 %}
 <table class="table table-striped abc1">
     <thead>
         <tr>
@@ -32,5 +33,10 @@
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+    <div class="alert alert-warning mt-3" role="alert">
+        No buses are available for the selected date or route. Please try searching for different options.
+    </div>
+    {% endif %}
 {% endblock %}
 {% set background_image = url_for('static',filename='images/bus.jpg') %}

@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
     <div class="jumbotron text-center mt-4 abc2" style="background-color: #ff7d01; padding: 50px 20px; color: white;">
         <h1 class="mt-0">Welcome to A4S Travels</h1>
         <p class="lead">Choose your preferred travel option below</p>
     </div>
-  <!-- <iframe src="https://www.youtube.com/embed/MD7v0-igVIM?autoplay=1&mute=1&controls=0" width="100%" height="500px"></iframe> -->
+
     <div class="container text-center mt-4">
         <div class="row justify-content-center">
             {% set travel_options = [
@@ -17,7 +16,7 @@
             ] %}
 
             {% for option in travel_options %}
-                <div class="col-md-3 col-6 text-center mb-4">
+                <div class="col-md-3 col-6 text-center mb-4 popup1">
                     <a href="{{ url_for(option.url) }}" class="d-block" style="text-decoration: none;">
                         <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: white; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
                             <img src="{{ url_for('static', filename='images/' + option.img) }}"
@@ -30,5 +29,72 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Featured Offers Carousel -->
+    <div id="featuredOffersCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='images/offer1.jpg') }}" class="d-block w-100" alt="Offer 1">
+<!--                <div class="carousel-caption d-none d-md-block">-->
+<!--                    <h5>Special Discount on Hotels</h5>-->
+<!--                    <p>Save up to 40% on select hotel bookings!</p>-->
+<!--                </div>-->
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/offer2.jpg') }}" class="d-block w-100" alt="Offer 2">
+<!--                <div class="carousel-caption d-none d-md-block">-->
+<!--                    <h5>Exclusive Flight Deals</h5>-->
+<!--                    <p>Find the best deals on international flights.</p>-->
+<!--                </div>-->
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/offer3.jpg') }}" class="d-block w-100" alt="Offer 3">
+<!--                <div class="carousel-caption d-none d-md-block">-->
+<!--                    <h5>Trains Across the Country</h5>-->
+<!--                    <p>Travel in comfort with our train booking options.</p>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredOffersCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredOffersCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+    <!-- Flight Routes Section -->
+    <div class="container text-center mt-4">
+        <h2>Popular Flight Routes</h2>
+        <div class="row justify-content-center">
+            {% set flight_routes = [
+                {'city': 'Chennai', 'img': 'chennai.jpg', 'routes': 'Via - Delhi, Mumbai, Coimbatore, Madurai'},
+                {'city': 'Hyderabad', 'img': 'hyderabad.jpg', 'routes': 'Via - Chennai, Mumbai, Bangalore, Delhi'},
+                {'city': 'Kolkata', 'img': 'kolkata.jpg', 'routes': 'Via - Delhi, Mumbai, Bangalore, Pune'},
+                {'city': 'Goa', 'img': 'goa.jpg', 'routes': 'Via - Delhi, Mumbai, Bangalore, Ahmedabad'},
+                {'city': 'Delhi', 'img': 'delhi.jpg', 'routes': 'Via - Mumbai, Pune, Bangalore, Chennai'},
+                {'city': 'Mumbai', 'img': 'mumbai.jpg', 'routes': 'Via - Delhi, Bangalore, Chennai, Ahmedabad'},
+                {'city': 'Pune', 'img': 'pune.jpg', 'routes': 'Via - Delhi, Bangalore, Chennai, Ahmedabad'},
+                {'city': 'Jaipur', 'img': 'jaipur.jpg', 'routes': 'Via - Mumbai, Delhi, Pune, Bangalore'}
+            ] %}
+
+            {% for route in flight_routes %}
+                <div class="col-md-3 col-6 text-center mb-4 mr popup">
+                    <div class="card" style="width: 18rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);">
+                        <img src="{{ url_for('static', filename='images/' + route.img) }}" class="card-img-top" alt="{{ route.city }} Image" style="height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ route.city }} Flights</h5>
+                            <p class="card-text">{{ route.routes }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
 

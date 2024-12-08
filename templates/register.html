@@ -11,6 +11,20 @@
                 <span id="usernameError" style="color:red;"></span>
             </div>
             <div class="form-outline mb-4">
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="form-outline mb-4">
                 <input type="email" id="email" class="form-control" name="email" required />
                 <label class="form-label" for="email">Email</label>
                 <span id="emailError" style="color:red;"></span>

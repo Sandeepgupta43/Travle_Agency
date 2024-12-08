@@ -2,6 +2,8 @@
 {% block content %}
 
 <h3 class="mt-5">Hotel Details</h3>
+    {% if hotels|length > 0 %}
+
 <table class="table table-striped abc1">
     <thead>
         <tr>
@@ -30,6 +32,11 @@
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+    <div class="alert alert-warning mt-3" role="alert">
+        No Hotels are available for the selected date. Please try searching for different date.
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% set background_image = url_for('static', filename='images/hotelBG.jpg') %}

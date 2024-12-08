@@ -29,7 +29,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% if session.get('user_id') %}
                 <li class="nav-item">
+                    {% if session.get('is_admin') %}
+                    <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+                    {% else %}
                     <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    {% endif %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('home') }}">Home</a>
@@ -56,37 +60,93 @@
 <div class="container">
     <br/>
     {% block content %}{% endblock %}
+    <br>
+    <br>
 </div>
 
-<footer class="bg-dark text-white text-center py-4 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h5>About Us</h5>
-                <p>We provide the best travel services for your trips, offering a wide range of options including flights, trains, buses, and hotels. Enjoy seamless booking with our easy-to-use platform.</p>
-            </div>
-            <div class="col-md-4">
-                <h5>Contact</h5>
-                <ul class="list-unstyled">
-                    <li><a href="mailto:info@travelagency.com" class="text-white">info@travelagency.com</a></li>
-                    <li><a href="tel:+123456789" class="text-white">+123 456 789</a></li>
-                    <li><a href="https://www.travelagency.com" class="text-white" target="_blank">www.travelagency.com</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Follow Us</h5>
-                <ul class="list-unstyled d-flex flex-column align-items-center">
-                <li><a href="#" class="text-white social-link"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                <li><a href="#" class="text-white social-link"><i class="fab fa-twitter"></i> Twitter</a></li>
-                <li><a href="#" class="text-white social-link"><i class="fab fa-instagram"></i> Instagram</a></li>
-                <li><a href="#" class="text-white social-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
-            </ul>
-            </div>
-        </div>
-        <hr class="my-4">
+<!--<footer class="bg-dark text-white text-center py-4 mt-5">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-4">-->
+<!--                <h5>About Us</h5>-->
+<!--                <p>We provide the best travel services for your trips, offering a wide range of options including flights, trains, buses, and hotels. Enjoy seamless booking with our easy-to-use platform.</p>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <h5>Contact</h5>-->
+<!--                <ul class="list-unstyled">-->
+<!--                    <li><a href="mailto:info@travelagency.com" class="text-white">info@travelagency.com</a></li>-->
+<!--                    <li><a href="tel:+123456789" class="text-white">+123 456 789</a></li>-->
+<!--                    <li><a href="https://www.travelagency.com" class="text-white" target="_blank">www.travelagency.com</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="col-md-4">-->
+<!--                <h5>Follow Us</h5>-->
+<!--                <ul class="list-unstyled d-flex flex-column align-items-center">-->
+<!--                <li><a href="#" class="text-white social-link"><i class="fab fa-facebook-f"></i> Facebook</a></li>-->
+<!--                <li><a href="#" class="text-white social-link"><i class="fab fa-twitter"></i> Twitter</a></li>-->
+<!--                <li><a href="#" class="text-white social-link"><i class="fab fa-instagram"></i> Instagram</a></li>-->
+<!--                <li><a href="#" class="text-white social-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>-->
+<!--            </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <hr class="my-4">-->
+<!--        <p class="mb-0">&copy; 2024 Travel Agency. All rights reserved.</p>-->
+<!--    </div>-->
+<!--</footer>-->
+
+
+
+
+         <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About Us</h3>
+          <p>We provide the best travel services for your trips, offering a wide range of options including flights, trains, buses, and hotels. Enjoy seamless booking with our easy-to-use platform.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Privacy Policy</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+          <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="#"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <ul class="social-media">
+            <li><a href="#" class="text-white social-link"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+            <li><a href="#" class="text-white social-link"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li><a href="#" class="text-white social-link"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#" class="text-white social-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+       </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-envelope"></i> Email Us</a></li>
+          <li><a href="#"><i class="fas fa-phone-alt"></i> Call Us</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Find Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
         <p class="mb-0">&copy; 2024 Travel Agency. All rights reserved.</p>
     </div>
-</footer>
+  </footer>
+
+
+
+
+
+
+
+
+
 <!-- java script file-->
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
