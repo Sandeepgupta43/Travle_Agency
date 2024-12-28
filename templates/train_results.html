@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mt-5">Train Details</h3>
+    {% if trains|length > 0 %}
+
+<table class="table table-striped abc1">
+    <thead>
+        <tr>
+            <th>Train Name</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure date</th>
+            <th>Available seats</th>
+            <th>Price</th>
+            <th>Book Now</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for train in trains %}
+        <tr>
+            <td>{{ train.train_name }}</td>
+            <td>{{ train.from_location }}</td>
+            <td>{{ train.to_location }}</td>
+            <td>{{ train.departure_date }}</td>
+            <td style="text-align: center;">{{ train.seats}}</td>
+            <td>{{ train.price }}</td>
+            <td>
+                <form action="{{ url_for('passenger_details',booking_type='train', transport_id=train.id) }}" method="GET">
+                    <button class="btn btn-success btn-sm" type="submit">Book Now</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="alert alert-warning mt-3" role="alert">
+        No trains are available for the selected date or route. Please try searching for different options.
+    </div>
+    {% endif %}
+{% endblock %}
+{% set background_image = url_for('static',filename='images/ai.jpg') %}

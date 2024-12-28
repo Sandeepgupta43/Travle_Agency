@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm" style="width: 400px; padding: 20px;">
+        <h2 class="text-center text-primary mb-4">Add Bus</h2>
+        <form method="POST">
+            <div class="form-group mb-3">
+                <label for="bus_name" class="form-label">Bus Name</label>
+                <input type="text" name="bus_name" class="form-control" id="bus_name" placeholder="Enter bus name" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="from_location" class="form-label">Departure City</label>
+                <input type="text" name="from_location" class="form-control" id="from_location" placeholder="Enter departure city" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="to_location" class="form-label">Destination City</label>
+                <input type="text" name="to_location" class="form-control" id="to_location" placeholder="Enter destination city" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="seats" class="form-label">Seats Available</label>
+                <input type="number" name="seats" class="form-control" id="seats" placeholder="Enter number of seats" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="departure_date" class="form-label">Departure Date & Time</label>
+                <input type="datetime-local" name="departure_date" class="form-control" id="departure_date" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="price" class="form-label">Price (₹)</label>
+                <input type="number" name="price" class="form-control" id="price" placeholder="Enter price" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">Add Bus</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

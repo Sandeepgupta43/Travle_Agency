@@ -1,0 +1,60 @@
+### Project Description: Online Travel Agency System
+
+Overview:  
+The Online Travel Agency System is a comprehensive platform designed to streamline the process of connecting customers, retailers, and administrators in the travel and hospitality industry. This system provides a user-friendly interface for managing bookings, orders, and profiles while ensuring secure access and operations for all stakeholders.
+
+---
+
+Key Features:
+1. User Management:
+   - Seamless registration and login functionality for users, retailers, and administrators.
+   - Role-based authentication (User, Retailer, Admin) ensuring access control.
+   - Profile management for all user types, including retailers.
+
+2. Retailer Management:
+   - Retailers can register their restaurants and manage their details (e.g., name, address, cuisine).
+   - Capability to view and edit menus (dishes), monitor orders, and update statuses.
+
+3. Order Management:
+   - Users can add items to their cart and place orders.
+   - Live status tracking of orders with an estimated delivery time.
+   - History of completed and pending orders for users.
+
+4. Admin Panel:
+   - Administrative dashboard for monitoring system-wide operations.
+   - Management of users, retailers, and overall platform functionality.
+
+5. Responsive Design:
+   - Fully responsive front-end for an optimized user experience across devices.
+   - Dynamic tables for displaying data such as orders, dishes, and retailer details.
+
+6. Security:
+   - Passwords are securely hashed using modern cryptographic standards.
+   - Session-based user tracking to protect access and maintain state.
+
+---
+
+Technologies Used:
+- Backend: Python (Flask framework)
+- Frontend: HTML, CSS (Bootstrap), JavaScript
+- Database: SQLAlchemy with a relational database (e.g., Mysql)
+- Version Control: Git & GitHub
+
+---
+
+How It Works:
+1. Users:
+   - Register, browse restaurants, and place orders.
+   - Edit their profile and view their order history.
+
+2. Retailers:
+   - Register as a retailer and manage restaurant listings.
+   - Add and update dishes, view incoming orders, and manage deliveries.
+
+3. Admin:
+   - Monitor all platform activities and perform administrative operations.
+
+---
+
+This project demonstrates a robust, scalable design ideal for managing an online travel or hospitality service. The system focuses on usability, security, and efficiency to deliver a seamless experience for all users.
+

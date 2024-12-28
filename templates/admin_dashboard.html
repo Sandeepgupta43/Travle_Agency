@@ -1,0 +1,104 @@
+
+    {% extends 'base.html' %}
+    {% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center text-primary mb-4">Admin Dashboard</h1>
+    
+        <!-- Flight, Railway, Bus, Hotel Add Options -->
+        <div class="row mb-4">
+            <div class="col-md-3 mb-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Add Transport</h5>
+                        <a href="{{ url_for('add_flight') }}" class="btn btn-primary btn-block">Add Flight</a>
+                        <a href="{{ url_for('add_railway') }}" class="btn btn-primary btn-block">Add Railway</a>
+                        <a href="{{ url_for('add_bus') }}" class="btn btn-primary btn-block">Add Bus</a>
+                        <a href="{{ url_for('add_hotel') }}" class="btn btn-primary btn-block">Add Hotel</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- View All Transport Options -->
+            <div class="col-md-3 mb-2">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">View All Transport</h5>
+                        <a href="{{ url_for('all_flights') }}" class="btn btn-secondary btn-block">All Flight</a>
+                        <a href="{{ url_for('all_trains') }}" class="btn btn-secondary btn-block">All Train</a>
+                        <a href="{{ url_for('all_buses') }}" class="btn btn-secondary btn-block">All Bus</a>
+                        <a href="{{ url_for('all_hotels') }}" class="btn btn-secondary btn-block">All Hotel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Users Section -->
+        <h2 class="text-center text-info mb-3">Users</h2>
+        <div class="table-responsive mb-5">
+            <table class="table table-hover table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Contact Number</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.contact_number }}</td>
+                        <td>{% if user.is_admin %}Admin{% else %}User{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <hr>
+    
+        <!-- Bookings Section -->
+        <h2 class="text-center text-info mb-3">Bookings</h2>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Booking Type</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings|reverse %}
+                        {% if loop.index <= 10 %}
+                        <tr>
+                            <td>{{ booking.id }}</td>
+                            <td>{{ booking.user_id }}</td>
+                            <td>{{ booking.booking_type }}</td>
+                            <td>{{ booking.date }}</td>
+                            <td>₹{{ booking.amount }}</td>
+                            <td>{{ booking.status }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Show All Bookings Button -->
+        <div class="text-center mt-4">
+            <a href="{{ url_for('all_bookings') }}" class="btn btn-warning btn-lg">Show All Bookings</a>
+        </div>
+    
+    </div>
+    
+
+    {% endblock %}
+    

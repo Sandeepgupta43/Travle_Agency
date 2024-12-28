@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="agency-name text-center my-3">A4S Travels</h1>
+
+<div class="ticket-container" id="ticket">
+    <div class="card p-3 p-md-4">
+        <h2 class="text-center mb-4">Booking Information</h2>
+
+        <!-- Booking Information -->
+        <div class="row mb-2">
+            <div class="col-6 text-truncate"><strong>Booking Type:</strong></div>
+            <div class="col-6 text-truncate">{{ booking.booking_type }}</div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-6 text-truncate"><strong>Booking Date:</strong></div>
+            <div class="col-6 text-truncate">{{ booking.date }}</div>
+        </div>
+
+        {% if booking.booking_type == 'hotel' %}
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Room Number:</strong></div>
+                <div class="col-6 text-truncate">{{ room_number }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Hotel Location:</strong></div>
+                <div class="col-6 text-truncate">{{ hotel_location }}</div>
+            </div>
+        {% else %}
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Departure From:</strong></div>
+                <div class="col-6 text-truncate">{{ from_location }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Departure To:</strong></div>
+                <div class="col-6 text-truncate">{{ to_location }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Departure Date:</strong></div>
+                <div class="col-6 text-truncate">{{ departure_date }}</div>
+            </div>
+        {% endif %}
+
+        <div class="row mb-2">
+            <div class="col-6 text-truncate"><strong>Status:</strong></div>
+            <div class="col-6 text-truncate">{{ booking.status }}</div>
+        </div>
+
+        <!-- Passenger Information -->
+        <h2 class="text-center mt-4 mb-3">Passenger Information</h2>
+
+        {% if first_passenger %}
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Name:</strong></div>
+                <div class="col-6 text-truncate">{{ first_passenger.name }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Age:</strong></div>
+                <div class="col-6 text-truncate">{{ first_passenger.age }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Seat/Room Number:</strong></div>
+                <div class="col-6 text-truncate">{{ first_passenger.seat_number }}</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-6 text-truncate"><strong>Contact Number:</strong></div>
+                <div class="col-6 text-truncate">{{ first_passenger.phone_no }}</div>
+            </div>
+        {% else %}
+            <p class="text-center">No passenger information available.</p>
+        {% endif %}
+
+        <!-- Total Amount -->
+        <div class="row mt-4">
+            <div class="col-6 text-truncate"><strong>Total Amount:</strong></div>
+            <div class="col-6 text-truncate">{{ booking.amount }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Buttons for Printing and PDF Download -->
+<div class="text-center mt-4">
+    <button onclick="printTicket()" class="btn btn-primary me-2">Print Ticket</button>
+    <button onclick="downloadPDF()" class="btn btn-secondary">Download PDF</button>
+</div>
+
+{% endblock %}

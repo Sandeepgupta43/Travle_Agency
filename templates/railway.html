@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="booking-container">
+        <h1 class="login-title">BOOK TICKET</h1>
+        <form action="{{ url_for('search_train') }}" method="POST" class="needs-validation" novalidate>
+            <!-- From Location -->
+            <div class="mb-4">
+                <label for="from_location" class="form-label">From</label>
+                <input type="text" id="from_location" class="form-control" name="from_location" placeholder="Enter departure station" required />
+                <div class="invalid-feedback">Please enter a departure station.</div>
+            </div>
+            
+            <!-- To Location -->
+            <div class="mb-4">
+                <label for="to_location" class="form-label">To</label>
+                <input type="text" id="to_location" class="form-control" name="to_location" placeholder="Enter destination station" required />
+                <div class="invalid-feedback">Please enter a destination station.</div>
+            </div>
+            
+            <!-- Date of Departure -->
+            <div class="mb-4">
+                <label for="departure_date" class="form-label">Date</label>
+                <input type="date" name="departure_date" id="departure_date" class="form-control" required>
+                <div class="invalid-feedback">Please select a valid date.</div>
+            </div>
+            
+            <!-- Search Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% set background_image = url_for('static', filename='images/ai.jpg') %}

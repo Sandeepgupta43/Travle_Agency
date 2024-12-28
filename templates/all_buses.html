@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center text-primary mb-4">Manage Buses</h3>
+
+    <!-- Add New Bus Button -->
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ url_for('add_bus') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New Bus
+        </a>
+    </div>
+
+    <!-- Check if there are any buses -->
+    {% if buses %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Bus ID</th>
+                        <th>Bus Name</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Departure Time</th>
+                        <th>Seats Available</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bus in buses %}
+                    <tr>
+                        <td>{{ bus.id }}</td>
+                        <td>{{ bus.bus_name }}</td>
+                        <td>{{ bus.from_location }}</td>
+                        <td>{{ bus.to_location }}</td>
+                        <td>{{ bus.departure_date }}</td>
+                        <td style="text-align: center;">{{ bus.seats }}</td>
+                        <td>₹{{ '{:,.2f}'.format(bus.price) }}</td> <!-- Format price with ₹ -->
+                        <td>
+                            <!-- Delete Bus Form -->
+                            <form action="{{ url_for('delete_bus') }}" method="POST" style="display:inline;">
+                                <input type="hidden" name="bus_id" value="{{ bus.id }}">
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+
+                            <!-- Edit Bus Link -->
+                            <a href="{{ url_for('edit_bus', bus_id=bus.id) }}" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            No buses available. Please add a new bus.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

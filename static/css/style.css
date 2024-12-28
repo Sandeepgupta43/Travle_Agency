@@ -1,0 +1,417 @@
+*{
+    font: 1.1rem "Fira Sans", sans-serif;
+    
+}
+
+.background {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%; 
+    position: relative;
+}
+
+.container {
+    z-index: 1;
+    position: relative;
+
+}
+
+h1{
+    margin-top: 2rem;
+    
+}
+h2{
+    font-weight: 900;
+}
+
+.logo1{
+    border-radius: 50%;
+    height: 12%;
+    width: 12%;
+    transition: 0.5s;
+    margin-left: 1rem;
+}
+
+.logo1:hover{
+    margin-top:2px;
+ }
+.zzz{
+    justify-content: center;
+    align-items: center;
+}
+
+ .abc{
+    margin-top: 5%;
+    background-color: rgb(173, 164, 164);
+    border: 2px solid #fccb90;
+    width: 37%;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.booking-form{
+    
+    margin-top: 8%;
+  
+}
+.abc h1{
+    font-size: xx-large;
+    font-weight: 700;
+}
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    }
+
+.abc1{
+    background-color:  lightgray;
+}
+.abc1 th{
+    font-size: larger;
+    font-weight: 700;
+    
+}
+
+.booking-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+
+
+body {
+    margin-top: 50px;
+    
+}
+
+
+
+.userDashboard{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.nav-link:hover {
+    color: blue;
+
+}
+.social-link {
+    font-size: 16px;         /* Adjust font size here */
+    margin: 5px 0;           /* Adjust vertical spacing between items */
+    color: white;
+}
+
+.social-link i {
+    margin-right: 5px;       /* Space between icon and text */
+}
+
+.login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("{{ background_image }}");
+        
+        background-size: cover;
+        background-position: center;
+    }
+    .login-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        max-width: 400px;
+        width: 100%;
+        
+        
+    }
+    .login-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #007bff;
+        text-align: center;
+    }
+    .form-outline .form-control {
+        background-color: #f1f1f1;
+    }
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+    }
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #004085);
+    }
+    .additional-links {
+        font-size: 0.9rem;
+    }
+
+    .register-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url("{{ background_image }}");
+        background-size: cover;
+        background-position: center;
+    }
+    .register-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+        max-width: 450px;
+        width: 100%;
+    }
+    .register-title {
+        font-size: 1.8rem;
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    footer{
+        border-radius:10px 10px 0 0;
+    }
+
+    .ticket-container {
+        width: 60%;
+        margin: auto;
+        padding: 20px;
+        background-color: white;
+    }
+    .agency-name {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #007bff;
+    }
+
+
+    .mr{
+        margin-right:60px;
+    }
+    /* Add a transition effect to every card */
+.popup {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* On hover, apply transform and box-shadow changes */
+.popup:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+}
+
+/* Optional: Add a pseudo-element for additional effects */
+.popup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.popup1{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.popup1:hover{
+    transform: scale(1.05); /* Slightly enlarge the card */
+
+}
+
+.carousel-item img{
+    border-radius:15px;
+}
+.carousel-item{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Ensure positioning for pseudo-elements if needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius:15px;
+}
+.carousel-item:hover{
+    transform: scale(1.05); /* Slightly enlarge the card */
+}
+.carousel-inner{
+    border-radius:15px;
+}
+/* Footer Styles */
+.footer {
+    background-color: #333; /* Dark background for footer */
+    color: #fff; /* White text color */
+    padding: 40px 20px; /* Padding around the footer */
+    font-size: 14px; /* Font size */
+}
+
+.footer-container {
+    display: flex; /* Flex layout for sections */
+    justify-content: space-between; /* Space between sections */
+    flex-wrap: wrap; /* Wrap sections on smaller screens */
+}
+
+.footer-section {
+    flex: 1; /* Each section takes equal space */
+    margin: 10px; /* Margin around each section */
+}
+
+.footer-section h3 {
+    margin-bottom: 10px; /* Spacing below the section heading */
+    font-size: 18px; /* Font size for section heading */
+}
+
+.footer-section ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.footer-section ul li {
+    margin-bottom: 8px; /* Spacing between list items */
+}
+
+.footer-section a {
+    color: #fff; /* White link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-section a:hover {
+    color: #f44336; /* Change color on hover */
+}
+
+.icon {
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle; /* Center align icon with text */
+}
+
+.social-media {
+    display: flex; /* Flex layout for social media icons */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.social-media li {
+    margin-right: 10px; /* Spacing between icons */
+}
+
+.footer-bottom {
+    text-align: center; /* Center align the footer bottom text */
+    margin-top: 20px; /* Margin above the footer bottom */
+    font-size: 12px; /* Smaller font size */
+}
+
+
+
+
+.flash-messages {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+@media (max-width: 767px) {
+    .card {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .card-img-top {
+        height: 120px;
+    }
+}
+.ticket-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .ticket-container {
+        padding: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+.ticket-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .ticket-container {
+        padding: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="booking-container">
+        <h1 class="login-title">Hotel Booking Form</h1>
+        <form id="booking-form" action="{{ url_for('search_hotel') }}" method="POST" class="needs-validation" novalidate>
+            <!-- Location Input -->
+            <div class="mb-4">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" id="location" class="form-control" name="location" placeholder="Enter city or area" required />
+                <div class="invalid-feedback">Please enter a location.</div>
+            </div>
+            
+            <!-- Date Input -->
+            <div class="mb-4">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" required />
+                <div class="invalid-feedback">Please select a valid date.</div>
+            </div>
+            
+            <!-- Search Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% set background_image = url_for('static', filename='images/hotel-background.jpg') %}
