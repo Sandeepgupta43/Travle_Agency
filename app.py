@@ -1,14 +1,20 @@
 
 from flask import Flask, render_template, redirect, url_for, request, session, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 from sqlalchemy import func
+import os
+
+# Load .env file
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = '1234'
 
-# Configure MySQL DB connection
-#                                        mysql+pymysql://username:password@localhost/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://ums08mncjhlpb9cj:A5pr1lVIVqR2t0Uv2N7G@bgpvzgqi3qve3lyjqkzs-mysql.services.clever-cloud.com:3306/bgpvzgqi3qve3lyjqkzs'
+# Load secret key from .env
+app.secret_key = os.getenv('SECRET_KEY')
+
+# Configure MySQL DB connection using environment variables
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('DB_USERNAME')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
