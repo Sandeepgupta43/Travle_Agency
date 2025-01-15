@@ -882,7 +882,7 @@ def process_payment(booking_type, transport_id, passenger_id):
 
     flash('Payment successful! Your booking is confirmed.')
 
-    if card_number == '1234567890123456' and expiry_date == '10/2025' and cvv == '123' and cardholder_name == 'sandeep':
+    if card_number and expiry_date and cvv and cardholder_name:
         new_booking = Booking(
             user_id=session['user_id'],
             booking_type=booking_type,
